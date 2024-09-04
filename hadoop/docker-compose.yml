@@ -1,0 +1,70 @@
+services:
+  namenode:
+    build: .
+    hostname: namenode
+    environment:
+      - HADOOP_ROLE=namenode
+    ports:
+      - "9870:9870" # HDFS Web UI
+    volumes:
+      - hadoop_data:/usr/local/hadoop/data
+    networks:
+      - hadoop_network
+
+  resourcemanager:
+    build: .
+    hostname: resourcemanager
+    environment:
+      - HADOOP_ROLE=resourcemanager
+    ports:
+      - "8088:8088" # YARN Web UI
+    volumes:
+      - hadoop_data:/usr/local/hadoop/data
+    networks:
+      - hadoop_network
+
+  datanode1:
+    build: .
+    hostname: datanode1
+    environment:
+      - HADOOP_ROLE=datanode
+    volumes:
+      - hadoop_data:/usr/local/hadoop/data/
+    networks:
+      - hadoop_network
+    depends_on:
+      - namenode
+      - resourcemanager
+
+  datanode2:
+    build: .
+    hostname: datanode2
+    environment:
+      - HADOOP_ROLE=datanode
+    volumes:
+      - hadoop_data:/usr/local/hadoop/data/
+    networks:
+      - hadoop_network
+    depends_on:
+      - namenode
+      - resourcemanager
+
+  miscnode:
+    build: .
+    hostname: miscnode
+    environment:
+      - HADOOP_ROLE=misc
+    volumes:
+      - hadoop_data:/usr/local/hadoop/data/
+    networks:
+      - hadoop_network
+    depends_on:
+      - namenode
+      - resourcemanager
+
+networks:
+  hadoop_network:
+
+
+volumes:
+  hadoop_data:
