@@ -4,4 +4,4 @@ export HDFS_SECONDARYNAMENODE_USER="root"
 export YARN_RESOURCEMANAGER_USER="root"
 export YARN_NODEMANAGER_USER="root"
 
-export JAVA_HOME=/usr/local/openjdk-8/
+export JAVA_HOME=/usr/local/openjdk-8

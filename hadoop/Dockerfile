@@ -4,7 +4,7 @@ ENV HADOOP_HOME=/usr/local/hadoop
 ENV HADOOP_VERSION=3.4.0
 ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y sudo wget less vim
 
 COPY hadoop-3.4.0.tar.gz .
 RUN tar -xzvf hadoop-$HADOOP_VERSION.tar.gz && \
